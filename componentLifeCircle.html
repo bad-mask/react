@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Component life circle</title>
+	<script type="text/javascript" src="./js/react.js"></script>
+	<script type="text/javascript" src="./js/react-dom.js"></script>
+	<script type="text/javascript" src="./js/browser.min.js"></script>
+	<script type="text/css"></script>
+	<style type="text/css">
+		#container{
+			padding:50px;
+			background-color:#FFF;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container"></div>
+	<script type="text/babel" >
+		var destination = document.querySelector("#container");
+
+		var Counter = React.createClass({
+			render:function(){
+				var textStyle = {	
+					fontSize:72,
+					fontFamily:"sans-serif",
+					color:"#333",
+					fontWeight:"bold"
+				};
+
+				return(
+					<div style={textStyle}>
+						{this.props.display}
+					</div>
+				);
+			}
+		});
+
+		var CounterParent = React.createClass({
+			getDefaultProps : function(){
+				console.log("getDefaultProps: receive props form outsize");
+				return {};
+			},
+
+			getInitialState: function(){
+				console.log("getInitialState: set default state object");
+				return {};
+			},
+
+			componentWillMount: function(){
+				console.log("componentWillMount: component will about to mount");
+				return ;
+			},
+
+			componentDidMount: function(){
+				console.log("componentDidMount: component is just mount");
+				return;
+			},
+
+			render:function(){
+				var backgroundStyle = {
+					padding:50,
+					border:"#333 2px dotted",
+					width:250,
+					height:100,
+					borderRadius:10,
+					rextAlign:"center"
+				}
+				var s = "countParent rendering..."
+				return (
+					<div style={backgroundStyle}>
+						<Counter display="0"/>
+						<button>+</button>
+					</div>
+				);
+			}
+		});
+
+
+		ReactDOM.render(
+			<div>
+				<CounterParent/>
+			</div>,
+			destination
+		);
+	</script>
+
+</body>
+<!--
+组件的生命周期：componentWillMount
+componentDidMount
+componentWillUnmount
+componentWillUpdata
+componentDidUpdate
+shouldComponentUpdata
+componentWillReceiveProps-->
+</html>
